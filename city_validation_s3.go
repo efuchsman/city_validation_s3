@@ -1,15 +1,9 @@
 package main
 
 import (
-	"os"
 	"sync"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/efuchsman/city_validation_s3/internal/citiesapi"
-	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -68,50 +62,4 @@ func main() {
 	for err := range errChan {
 		log.Fatalf("Received error from goroutine: %v", err)
 	}
-
-	// Upload files to S3
-	if err := uploadToS3("results/valid_elements.json", "city-validation-s3", "results/valid_elements.json"); err != nil {
-		log.Fatalf("Error uploading valid_elements.json to S3: %v", err)
-	}
-	if err := uploadToS3("results/invalid_elements.json", "city-validation-s3", "results/invalid_elements.json"); err != nil {
-		log.Fatalf("Error uploading invalid_elements.json to S3: %v", err)
-	}
-	if err := uploadToS3("results/unprocessable_files.csv", "city-validation-s3", "results/unprocessable_files.csv"); err != nil {
-		log.Fatalf("Error uploading unprocessable_files.csv to S3: %v", err)
-	}
-}
-
-func uploadToS3(filePath string, bucketName string, objectKey string) error {
-	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
-	awsRegion := os.Getenv("AWS_REGION")
-	awsId := os.Getenv("AWS_ACCESS_KEY_ID")
-	awsKey := os.Getenv("AWS_SECRET_ACCESS_KEY")
-
-	sess, err := session.NewSession(&aws.Config{
-		Region:      aws.String(awsRegion),
-		Credentials: credentials.NewStaticCredentials(awsId, awsKey, ""),
-	})
-
-	if err != nil {
-		return err
-	}
-
-	svc := s3.New(sess)
-
-	file, err := os.Open(filePath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	_, err = svc.PutObject(&s3.PutObjectInput{
-		Bucket: aws.String(bucketName),
-		Key:    aws.String(objectKey),
-		Body:   file,
-	})
-
-	return err
 }
