@@ -1,5 +1,5 @@
 ## App Description:
-* My iteration of this take home challenge reads all provided files within the [data package](data/)
+* City-Validation-S3 reads all provided files within the [data package](data/)
 * A CitiesMap is created and stored in the client with the cities located inside [cites.json](data/cities.json)
 * Tmp cities located [here](data/tmp), are compared and validated against the map
 * Files for both valid elements, invalid elements and unprocessable files are then generated inside of the [results package](results)
