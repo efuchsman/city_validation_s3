@@ -2,7 +2,7 @@
 * City-Validation-S3 reads all provided files within the [data package](data/)
 * A CitiesMap is created and stored in the client with the cities located inside [cites.json](data/cities.json)
 * Tmp cities located [here](data/tmp), are compared and validated against the map
-* Files for both valid elements, invalid elements and unprocessable files are then generated inside of the [results package](results)
+* Files for valid elements, invalid elements and unprocessable files are then generated inside of the [results package](results)
 * This app can be run using either `go run` or a docker container.
 * Due to time constraints, there is only partial testing of some of the functions
 
