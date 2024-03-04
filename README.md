@@ -1,3 +1,16 @@
+<h1 align="center"> City Validation S3</h1>
+
+ <div align="center">
+  <a href="https://github.com/efuchsman/city_validation_s3">
+    <img src = "https://images.adsttc.com/media/images/5881/2cee/e58e/ceee/4400/005d/original/globalimmigration.gif?1484860652">
+  </a>
+</div>
+
+  <h3 align="center">
+    <br />
+  </h3>
+</div>
+
 ## App Description:
 * City-Validation-S3 reads all provided files within the [data package](data/)
 * A CitiesMap is created and stored in the client with the cities located inside [cites.json](data/cities.json)
