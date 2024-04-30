@@ -3,3 +3,5 @@
 /migrations/create_test_user.sql
 enter_pgdev.sh
 enter_pgtest.sh
+/config/test.yml
+/config/dev.yml
